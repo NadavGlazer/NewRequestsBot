@@ -1,0 +1,13 @@
+{
+    "MainComputerDriverPath": "C:\\Users\\Nadav1\\Downloads\\chromedriver_win32\\chromedriver.exe"
+    ,    
+    "RishonLezion":[
+        {
+            "url" : "https://rishonlezion.complot.co.il/newengine/Pages/pirsumim2.aspx",
+            "from_date_table_id" : "PubsDateFrom",
+            "today_button_class_name" : "today",
+            "submit_button_xpath" : "//*[@id='btnShow']",
+            "request_table_xpath" : "//table/tbody/tr"
+        }
+    ]
+}
