@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "c:\\Users\\Nadav1\\Desktop\\GithubRepo`s\\NewRequestsBot\\venv\\Scripts\\python.exe"
+    "python.pythonPath": "c:\\Users\\Nadav1\\Desktop\\GithubRepo`s\\NewRequestsBot\\venv\\Scripts\\python.exe",
+    "python.formatting.provider": "autopep8"
 }

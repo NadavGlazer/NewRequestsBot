@@ -1,27 +1,33 @@
-from selenium import webdriver
 from datetime import datetime
 import time
+import utils
+import os 
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--start-maximized')
+if __name__ == "__main__":
+    while(True):
+        current_minute = datetime.now().strftime("%M")
+        print(current_minute)
+        if current_minute == current_minute:
+            break
+        if(current_minute != 59):
+            time.sleep(60)
+    
+    while(True):
+        filename = utils.generate_daily_information_text_file()
+        current_request_amount = utils.find_request_amount_by_city("RishonLezion")
+        last_line = ""
+        with open("InformationFiles/" + filename, "r+") as information_file:
+            information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_request_amount) +"\n")
+            for line in information_file:
+                    last_line = line
+        
+        last_request_amount = int(last_line.split("*")[1])
 
-driver = webdriver.Chrome(executable_path='C:\\Users\\Nadav1\\Downloads\\chromedriver_win32\\chromedriver.exe',chrome_options=chrome_options ) 
-driver.maximize_window()
+        if current_request_amount > last_request_amount:
+            print("New requests")
+        else:
+            print("Noting new")
+        
+        time.sleep(3600)    
 
-url = "https://rishonlezion.complot.co.il/newengine/Pages/pirsumim2.aspx"
 
-driver.get(url)
-time.sleep(2)
-#current_date = datetime.now().strftime("%d/%m/%Y")
-
-from_date = driver.find_element_by_id('PubsDateFrom')
-from_date.click()
-
-today_button = driver.find_element_by_class_name('today')
-today_button.click()
-
-submit_button = driver.find_element_by_xpath('//*[@id="btnShow"]')
-submit_button.click()
-
-new_request_table = driver.find_elements_by_xpath("//table/tbody/tr")
-print(len(new_request_table))
