@@ -1,9 +1,9 @@
-import selenium
 from datetime import datetime
 from selenium import webdriver
 import time
 import json
 import os
+import smtplib
 
 def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath):
     """Gets the information about one site and returns the amount of requests"""
@@ -56,4 +56,17 @@ def generate_daily_information_text_file():
             information_file.write(datetime.now().strftime("%H:%M:%S") + "* " +"0" +"\n")
 
     return(filename)
+
+def send_email(city):
+    smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+    smtpObj.ehlo()
+    smtpObj.starttls()
+    smtpObj.login('nesahbot@gmail.com', 'Abcd1234!')
+
+    json_file = open("config.json", encoding="utf8")
+    json_data = json.load(json_file)
+   
+    smtpObj.sendmail('nesahbot@gmail.com','nadav28223@gmail.com','Subject: New Requests at - ............................ ' + json_data[city][0]["url"])
+    print("Sent Mail")
+    smtpObj.quit()
             

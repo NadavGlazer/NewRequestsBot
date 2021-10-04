@@ -7,9 +7,9 @@ if __name__ == "__main__":
     while(True):
         current_minute = datetime.now().strftime("%M")
         print(current_minute)
-        if current_minute == current_minute:
+        if current_minute == 00:
             break
-        if(current_minute != 59):
+        if current_minute != 59:
             time.sleep(60)
     
     while(True):
@@ -25,6 +25,7 @@ if __name__ == "__main__":
 
         if current_request_amount > last_request_amount:
             print("New requests")
+            utils.send_email("RishonLezion")
         else:
             print("Noting new")
         
