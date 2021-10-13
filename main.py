@@ -3,16 +3,10 @@ import time
 import utils
 import os 
 
-if __name__ == "__main__":
-    while(True):
-        current_minute = datetime.now().strftime("%M")
-        print(current_minute)
-        if current_minute == 00:
-            break
-        if current_minute != 59:
-            time.sleep(60)
-    
-    while(True):
+
+def run_on_working_hours():
+    """Runs the program"""
+    while(utils.check_if_working_hours()):
         filename = utils.generate_daily_information_text_file()
         current_request_amount = utils.find_request_amount_by_city("RishonLezion")
         last_line = ""
@@ -22,13 +16,18 @@ if __name__ == "__main__":
                     last_line = line
         
         last_request_amount = int(last_line.split("*")[1])
-
+        
         if current_request_amount > last_request_amount:
             print("New requests")
             utils.send_email("RishonLezion")
         else:
             print("Noting new")
         
-        time.sleep(3600)    
+        time.sleep(3600)
+
+
+if __name__ == "__main__":
+    run_on_working_hours()    
+        
 
 

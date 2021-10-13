@@ -5,10 +5,25 @@ import json
 import os
 import smtplib
 
+
+def check_if_working_hours():
+    """Returns True if its working hours else returns False"""
+    """Working hours are set from 8:00 to 17:00"""
+    if int(datetime.now().strftime("%H")) >=18 :
+        print("too late")           
+    elif int(datetime.now().strftime("%H")) <7:
+        print("too early")
+    else:
+        return True
+    return False      
+
+
 def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath):
     """Gets the information about one site and returns the amount of requests"""
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--start-maximized')
+    chrome_options.add_argument("--headless")  
+
 
     driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options) 
     driver.maximize_window()
@@ -25,12 +40,22 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
     submit_button = driver.find_element_by_xpath(submit_button_xpath)
     submit_button.click()
 
+    #To take off options of 0 elements - 0 requests. 
+    try:
+        first_table_element = driver.find_element_by_class_name("odd")
+    except:
+        driver.close()
+        print(0)
+        return(0)
+
     request_table = driver.find_elements_by_xpath(request_table_xpath)
-    print(len(request_table))
+    request_amount = len(request_table)
+    
+    print(request_amount)
 
     driver.close()
 
-    return(len(request_table))
+    return(request_amount)
 
 def find_request_amount_by_city(city):
     """Gets a city, calls for 'find_request_amount' function and takes the information from the json"""
@@ -45,6 +70,7 @@ def find_request_amount_by_city(city):
         json_data[city][0]["submit_button_xpath"],
         json_data[city][0]["request_table_xpath"]
     ))
+    
 def generate_daily_information_text_file():
     """generates the filename and the file"""
 
