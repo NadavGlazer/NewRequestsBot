@@ -25,6 +25,7 @@ def run_on_working_hours():
         else:
             print("Noting new")
         
+        print("Waiting for an hour")
         time.sleep(3600)
 
 def check_if_working_hours():
@@ -39,7 +40,7 @@ def check_if_working_hours():
     return False      
 
 
-def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath):
+def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, main_request_table_xpath):
     """Gets the information about one site and returns the amount of requests"""
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--start-maximized')
@@ -63,7 +64,7 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
 
     #To take off options of 0 elements - 0 requests. 
     try:
-        first_table_element = driver.find_element_by_class_name("odd")
+        requests_table = driver.find_element_by_xpath(main_request_table_xpath)
     except:
         driver.close()
         print(0)
@@ -89,7 +90,8 @@ def find_request_amount_by_city(city):
         json_data[city][0]["from_date_table_id"],
         json_data[city][0]["today_button_class_name"],
         json_data[city][0]["submit_button_xpath"],
-        json_data[city][0]["request_table_xpath"]
+        json_data[city][0]["request_table_xpath"],
+        json_data[city][0]["main_request_table_xpath"]
     ))
 
 def generate_daily_information_text_file():

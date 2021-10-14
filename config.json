@@ -7,7 +7,9 @@
             "from_date_table_id" : "PubsDateFrom",
             "today_button_class_name" : "today",
             "submit_button_xpath" : "//*[@id='btnShow']",
-            "request_table_xpath" : "//table/tbody/tr"
+            "request_table_xpath" : "//table/tbody/tr",
+            "main_request_table_xpath" : "//*[@id='bk-results-table']"
+            
         }
     ]
 }
