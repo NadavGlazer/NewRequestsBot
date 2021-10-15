@@ -8,25 +8,29 @@ import smtplib
 
 def run_on_working_hours():
     """Runs the program"""
-    while(check_if_working_hours()):
-        filename = generate_daily_information_text_file()
-        current_request_amount = find_request_amount_by_city("RishonLezion")
-        last_line = ""
-        with open("InformationFiles/" + filename, "r+") as information_file:
-            information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_request_amount) +"\n")
-            for line in information_file:
-                    last_line = line
-        
-        last_request_amount = int(last_line.split("*")[1])
+    while(True):
+        if (check_if_working_hours()):
+            filename = generate_daily_information_text_file()
+            current_request_amount = find_request_amount_by_city("RishonLezion")
+            last_line = ""
+            with open("InformationFiles/" + filename, "r+") as information_file:
+                information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_request_amount) +"\n")
+                for line in information_file:
+                        last_line = line
+            
+            last_request_amount = int(last_line.split("*")[1])
 
-        if current_request_amount > last_request_amount:
-            print("New requests")
-            send_email("RishonLezion")
+            if current_request_amount > last_request_amount:
+                print("New requests")
+                send_email("RishonLezion")
+            else:
+                print("Noting new")
+            
+            print("Waiting for an hour " + datetime.now().strftime("%H:%M:%S"))
+            time.sleep(3600)
         else:
-            print("Noting new")
-        
-        print("Waiting for an hour")
-        time.sleep(3600)
+            print("Waiting half a hour " + datetime.now().strftime("%H:%M:%S"))
+            time.sleep(1800)
 
 def check_if_working_hours():
     """Returns True if its working hours else returns False"""
