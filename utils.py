@@ -35,7 +35,7 @@ def run_on_working_hours():
 def check_if_working_hours():
     """Returns True if its working hours else returns False"""
     """Working hours are set from 8:00 to 17:00"""
-    if int(datetime.now().strftime("%H")) >=18 :
+    if int(datetime.now().strftime("%H")) >=25 :
         print("too late")           
     elif int(datetime.now().strftime("%H")) <7:
         print("too early")
@@ -44,11 +44,10 @@ def check_if_working_hours():
     return False      
 
 
-def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, main_request_table_xpath):
+def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, plan_table_xpath, main_request_table_xpath):
     """Gets the information about one site and returns the amount of requests"""
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")  
-    chrome_options.headless = True 
     chrome_options.add_argument("--hide-scrollbars")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -73,20 +72,23 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
 
     #To take off options of 0 elements - 0 requests. 
     try:
-        requests_table = driver.find_element_by_xpath(main_request_table_xpath)
+        requests_table = driver.find_elements_by_xpath(request_table_xpath)
     except:
         driver.close()
         print(0)
         return(0)
 
     request_table = driver.find_elements_by_xpath(request_table_xpath)
-    request_amount = len(request_table)
-    
+    request_amount = len(request_table)    
     print(request_amount)
+
+    plans_table =  driver.find_elements_by_xpath(plan_table_xpath)
+    plan_amount = len(plans_table)
+    print(plan_amount)
 
     driver.close()
 
-    return(request_amount)
+    return(request_amount+plan_amount)
 
 def find_request_amount_by_city(city):
     """Gets a city, calls for 'find_request_amount' function and takes the information from the json"""
@@ -100,6 +102,7 @@ def find_request_amount_by_city(city):
         json_data[city][0]["today_button_class_name"],
         json_data[city][0]["submit_button_xpath"],
         json_data[city][0]["request_table_xpath"],
+        json_data[city][0]["plan_table_xpath"],
         json_data[city][0]["main_request_table_xpath"]
     ))
 
