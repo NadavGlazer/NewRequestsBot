@@ -47,24 +47,29 @@ def check_if_working_hours():
 def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, main_request_table_xpath):
     """Gets the information about one site and returns the amount of requests"""
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--start-maximized')
     chrome_options.add_argument("--headless")  
+    chrome_options.headless = True 
+    chrome_options.add_argument("--hide-scrollbars")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
 
 
     driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options) 
-    driver.maximize_window()
     
     driver.get(url)
-    time.sleep(2)
+    time.sleep(1)
 
     from_date = driver.find_element_by_id(from_date_table_id)
     from_date.click()
+    time.sleep(1)
 
     today_button = driver.find_element_by_class_name(today_button_class_name)
     today_button.click()
+    time.sleep(1)
 
     submit_button = driver.find_element_by_xpath(submit_button_xpath)
     submit_button.click()
+    time.sleep(1)
 
     #To take off options of 0 elements - 0 requests. 
     try:
