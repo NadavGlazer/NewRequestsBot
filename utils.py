@@ -44,38 +44,50 @@ def check_if_working_hours():
     return False      
 
 
-def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, plan_table_xpath):
+def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, request_table_first_cell_xpath, plan_table_xpath, plan_table_first_cell_xpath, no_data_found_hebrow):
     """Gets the information about one site and returns the amount of requests"""
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")  
     chrome_options.add_argument("--hide-scrollbars")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-
-
-    driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options) 
     
+    try:
+        driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options)
+    except:
+        time.sleep(1)
+        driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options)
+    time.sleep(2)
+
     driver.get(url)
-    time.sleep(1)
+    time.sleep(2)
 
     from_date = driver.find_element_by_id(from_date_table_id)
     from_date.click()
-    time.sleep(1)
+    time.sleep(2)
 
     today_button = driver.find_element_by_class_name(today_button_class_name)
     today_button.click()
-    time.sleep(1)
+    time.sleep(2)
 
     submit_button = driver.find_element_by_xpath(submit_button_xpath)
     submit_button.click()
-    time.sleep(1)
+    time.sleep(2)
     
     request_table = driver.find_elements_by_xpath(request_table_xpath)
-    request_amount = len(request_table)    
-    print(request_amount)
+    request_amount = len(request_table)
+
+    if request_amount == 1 and driver.find_element_by_xpath(request_table_first_cell_xpath).text == no_data_found_hebrow:
+        request_amount = 0      
+    print(request_amount)   
+        
 
     plans_table =  driver.find_elements_by_xpath(plan_table_xpath)
     plan_amount = len(plans_table)
+
+    if plan_amount == 1 and driver.find_element_by_xpath(plan_table_first_cell_xpath).text == no_data_found_hebrow:
+        plan_amount = 0     
+
     print(plan_amount)
 
     driver.close()
@@ -94,7 +106,10 @@ def find_request_amount_by_city(city):
         json_data[city][0]["today_button_class_name"],
         json_data[city][0]["submit_button_xpath"],
         json_data[city][0]["request_table_xpath"],
-        json_data[city][0]["plan_table_xpath"]        
+        json_data[city][0]["request_table_first_cell_xpath"],
+        json_data[city][0]["plan_table_xpath"],
+        json_data[city][0]["plan_table_first_cell_xpath"],
+        json_data["NoDataFoundHebrow"]       
     ))
 
 def generate_daily_information_text_file():
