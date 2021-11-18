@@ -62,7 +62,11 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
     driver.get(url)
     time.sleep(2)
 
-    from_date = driver.find_element_by_id(from_date_table_id)
+    try:
+        from_date = driver.find_element_by_id(from_date_table_id)
+    except:
+        time.sleep(1)
+        from_date = driver.find_element_by_id(from_date_table_id)
     from_date.click()
     time.sleep(2)
 
