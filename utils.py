@@ -10,26 +10,34 @@ def run_on_working_hours():
     """Runs the program"""
     while(True):
         if (check_if_working_hours()):
+            #Creates new information file in the begging of the day else does noting
             filename = generate_daily_information_text_file()
-            current_request_amount = find_request_amount_by_city("RishonLezion")
+
+            #Gets the current amount of uploaded files 
+            current_uploads_amount = find_request_amount_by_city("RishonLezion")
+            
+            #Reads the last amount of uploaded files from the information file
             last_line = ""
             with open("InformationFiles/" + filename, "r+") as information_file:
-                information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_request_amount) +"\n")
+                information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_uploads_amount) +"\n")
                 for line in information_file:
                         last_line = line
             
-            last_request_amount = int(last_line.split("*")[1])
+            last_uploads_amount = int(last_line.split("*")[1])
 
-            if current_request_amount > last_request_amount:
+            #In case theres new uploaded files- sends mail to the relevant emails
+            if current_uploads_amount > last_uploads_amount:
                 print("New requests")
                 send_email("RishonLezion")
             else:
                 print("Noting new")
             
+            #Waiting an hour then checking again
             print("Waiting for an hour " + datetime.now().strftime("%H:%M:%S"))
             time.sleep(3600)
         else:
-            print("Waiting half a hour " + datetime.now().strftime("%H:%M:%S"))
+            #Waiting half an hour then checking again
+            print("Waiting half an hour " + datetime.now().strftime("%H:%M:%S"))
             time.sleep(1800)
 
 def check_if_working_hours():
@@ -46,12 +54,14 @@ def check_if_working_hours():
 
 def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, request_table_first_cell_xpath, plan_table_xpath, plan_table_first_cell_xpath, no_data_found_hebrow):
     """Gets the information about one site and returns the amount of requests"""
+    #Sets the Chrome options
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")  
     chrome_options.add_argument("--hide-scrollbars")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     
+    #Creating the driver
     try:
         driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options)
     except:
@@ -59,9 +69,13 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
         driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options)
     time.sleep(2)
 
+    #Opening the URL
     driver.get(url)
     time.sleep(2)
 
+    #Starting the process of extracting the data
+
+    #Finding and clicking on the "from date" input
     try:
         from_date = driver.find_element_by_id(from_date_table_id)
     except:
@@ -70,28 +84,30 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
     from_date.click()
     time.sleep(2)
 
+    #Setting the date to today`s date
     today_button = driver.find_element_by_class_name(today_button_class_name)
     today_button.click()
     time.sleep(2)
 
+    #Submiting the date
     submit_button = driver.find_element_by_xpath(submit_button_xpath)
     submit_button.click()
     time.sleep(2)
     
+    #Getting the amount of requests in the site
     request_table = driver.find_elements_by_xpath(request_table_xpath)
     request_amount = len(request_table)
-
+    #Checking if theres no requests
     if request_amount == 1 and driver.find_element_by_xpath(request_table_first_cell_xpath).text == no_data_found_hebrow:
         request_amount = 0      
-    print(request_amount)   
-        
+    print(request_amount)        
 
+    #Getting the amount of plans in the site
     plans_table =  driver.find_elements_by_xpath(plan_table_xpath)
     plan_amount = len(plans_table)
-
+    #Checking if theres no plans
     if plan_amount == 1 and driver.find_element_by_xpath(plan_table_first_cell_xpath).text == no_data_found_hebrow:
         plan_amount = 0     
-
     print(plan_amount)
 
     driver.close()
@@ -129,6 +145,7 @@ def generate_daily_information_text_file():
     return(filename)
 
 def send_email(city):
+    """Gets a city and sends mail that theres new uploads"""
     smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpObj.ehlo()
     smtpObj.starttls()
@@ -137,7 +154,7 @@ def send_email(city):
     json_file = open("config.json", encoding="utf8")
     json_data = json.load(json_file)
    
-    smtpObj.sendmail('nesahbot@gmail.com','nadav28223@gmail.com','Subject: New Requests at - ............................ ' + json_data[city][0]["url"])
+    smtpObj.sendmail('nesahbot@gmail.com','nadav28223@gmail.com','Subject: New Uploads at - ............................ ' + json_data[city][0]["url"])
     print("Sent Mail")
     smtpObj.quit()
             
