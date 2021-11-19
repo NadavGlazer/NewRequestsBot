@@ -4,6 +4,7 @@ import time
 import json
 import os
 import smtplib
+from email.message import EmailMessage
 
 
 def run_on_working_hours():
@@ -11,27 +12,42 @@ def run_on_working_hours():
     while(True):
         if (check_if_working_hours()):
             #Creates new information file in the begging of the day else does noting
-            filename = generate_daily_information_text_file()
+            json_file = open("config.json", encoding="utf8")
+            json_data = json.load(json_file)
 
-            #Gets the current amount of uploaded files 
-            current_uploads_amount = find_request_amount_by_city("RishonLezion")
-            
-            #Reads the last amount of uploaded files from the information file
-            last_line = ""
-            with open("InformationFiles/" + filename, "r+") as information_file:
-                information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_uploads_amount) +"\n")
-                for line in information_file:
-                        last_line = line
-            
-            last_uploads_amount = int(last_line.split("*")[1])
+            city_with_updates = []
+            counter = 0
 
-            #In case theres new uploaded files- sends mail to the relevant emails
-            if current_uploads_amount > last_uploads_amount:
-                print("New requests")
-                send_email("RishonLezion")
-            else:
-                print("Noting new")
+            while counter != len(json_data["Citys"]):
+                city_data = json_data["Citys"][0][str(counter)][0]         
+                city_name = city_data["Name"]
+
+                filename = generate_city_daily_information_text_file(city_name)
+                
+                #Gets the current amount of uploaded files 
+                current_uploads_amount = find_request_amount_by_city(city_data)            
+                
+                #Reads the last amount of uploaded files from the information file
+                last_line = ""
+                with open("InformationFiles/" + filename, "r+") as information_file:
+                    information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_uploads_amount) +"\n")
+                    for line in information_file:
+                            last_line = line
             
+                last_uploads_amount = int(last_line.split("*")[1])
+
+                #In case theres new uploaded files- sends mail to the relevant emails
+                if current_uploads_amount > last_uploads_amount:
+                    print("New Uploads In - " + city_name)
+                    
+                    city_with_updates.append(city_data)
+                else:
+                    print("Noting new In - " + city_name)
+                counter += 1
+            
+            if city_with_updates:
+                send_email(city_with_updates)
+
             #Waiting an hour then checking again
             print("Waiting for an hour " + datetime.now().strftime("%H:%M:%S"))
             time.sleep(3600)
@@ -43,7 +59,11 @@ def run_on_working_hours():
 def check_if_working_hours():
     """Returns True if its working hours else returns False"""
     """Working hours are set from 8:00 to 17:00"""
-    if int(datetime.now().strftime("%H")) >=18 :
+
+    #Checks if its Friday or Saturday
+    if datetime.today().weekday() == 4 or datetime.today().weekday() == 5:
+        print("Rest days")
+    elif int(datetime.now().strftime("%H")) >=18 :
         print("too late")           
     elif int(datetime.now().strftime("%H")) <7:
         print("too early")
@@ -114,28 +134,28 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
 
     return(request_amount+plan_amount)
 
-def find_request_amount_by_city(city):
+def find_request_amount_by_city(city_data):
     """Gets a city, calls for 'find_request_amount' function and takes the information from the json"""
     json_file = open("config.json", encoding="utf8")
     json_data = json.load(json_file)
 
     return(find_request_amount(
         json_data["MainComputerDriverPath"],
-        json_data[city][0]["url"],
-        json_data[city][0]["from_date_table_id"],
-        json_data[city][0]["today_button_class_name"],
-        json_data[city][0]["submit_button_xpath"],
-        json_data[city][0]["request_table_xpath"],
-        json_data[city][0]["request_table_first_cell_xpath"],
-        json_data[city][0]["plan_table_xpath"],
-        json_data[city][0]["plan_table_first_cell_xpath"],
+        city_data["url"],
+        city_data["from_date_table_id"],
+        city_data["today_button_class_name"],
+        city_data["submit_button_xpath"],
+        city_data["request_table_xpath"],
+        city_data["request_table_first_cell_xpath"],
+        city_data["plan_table_xpath"],
+        city_data["plan_table_first_cell_xpath"],
         json_data["NoDataFoundHebrow"]       
     ))
 
-def generate_daily_information_text_file():
+def generate_city_daily_information_text_file(city):
     """generates the filename and the file"""
 
-    filename = "Information_" + datetime.now().strftime("%d_%m_%y")
+    filename = str(city) + "_Information_" + datetime.now().strftime("%d_%m_%y")
     is_new_day = os.path.exists("InformationFiles/" + filename)
 
     with open("InformationFiles/" + filename,"a") as information_file:
@@ -144,17 +164,34 @@ def generate_daily_information_text_file():
 
     return(filename)
 
-def send_email(city):
+def send_email(city_data_array):
     """Gets a city and sends mail that theres new uploads"""
-    smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
-    smtpObj.ehlo()
-    smtpObj.starttls()
-    smtpObj.login('nesahbot@gmail.com', 'Abcd1234!')
-
+    
     json_file = open("config.json", encoding="utf8")
-    json_data = json.load(json_file)
-   
-    smtpObj.sendmail('nesahbot@gmail.com','nadav28223@gmail.com','Subject: New Uploads at - ............................ ' + json_data[city][0]["url"])
+    json_data = json.load(json_file)  
+
+
+    EMAIL_ADDRESS = json_data["BotEmailInfo"][0]["EmailAdress"]
+    EMAIL_PASSWORD = json_data["BotEmailInfo"][0]["Password"]
+
+    contacts = json_data["MailingList"]
+
+    massage = ""
+    for city_data in city_data_array:
+        massage = "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "\n" 
+
+    msg = EmailMessage()
+    msg['Subject'] = 'New Updates'
+    msg['From'] = EMAIL_ADDRESS
+    msg['To'] = contacts
+    msg.set_content(massage)
+
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+        smtp.send_message(msg)
+
     print("Sent Mail")
-    smtpObj.quit()
+
+
             
