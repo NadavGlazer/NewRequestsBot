@@ -48,7 +48,8 @@ Change the URL of the cell
                     "url": "https://www.holon.muni.il/Residents/Engineering/LocatingInformation/Pages/pirsumim2.aspx"
                 }
             ] 
-'Changes to :'
+            
+Changes to :
 
 "2": [
                 {
