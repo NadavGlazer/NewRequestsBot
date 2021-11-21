@@ -61,5 +61,4 @@ Kill the old docker - docker kill [Docker ID]
 Create The updated one (look line 4)
 
 Finished - The docker is up and updated.
-
 -----------------------------------
