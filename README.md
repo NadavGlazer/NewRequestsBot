@@ -2,11 +2,13 @@
 Extracts information from citys websites, and sends mails to given people when theres new updates.
 
 Creating and running the docker :
+----------------------------------- 
+
 Open cmd
 
 enter youre machine
-ssh name@ip
-password
+          ssh name@ip
+          password
 
 cd docker file location
 
@@ -18,11 +20,11 @@ docker run -ti -d  munitcipal0.21
 Run the docker - for example : 
           docker run -ti -d  munitcipal0.1
           
-Finished - the docker is now up.
+Finished - the docker is up.
+
+
+#Adding new citys website :
 ----------------------------------- 
-
-
-#Adding new citys website : 
 
 Open winSCP
 
@@ -61,4 +63,3 @@ Kill the old docker - docker kill [Docker ID]
 Create The updated one (look line 4)
 
 Finished - The docker is up and updated.
------------------------------------
