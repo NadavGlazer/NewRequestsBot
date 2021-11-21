@@ -18,9 +18,8 @@ docker run -ti -d  munitcipal0.21
 Run the docker - for example : 
           docker run -ti -d  munitcipal0.1
           
------------------------------------ 
-
 Finished - the docker is now up.
+----------------------------------- 
 
 
 #Adding new citys website : 
@@ -61,5 +60,6 @@ Kill the old docker - docker kill [Docker ID]
 
 Create The updated one (look line 4)
 
------------------------------------
 Finished - The docker is up and updated.
+
+-----------------------------------
