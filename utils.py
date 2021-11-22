@@ -18,7 +18,7 @@ def run_on_working_hours():
             city_with_updates = []
             counter = 0
 
-            while counter != len(json_data["Citys"]):
+            while counter < len(json_data["Citys"][0]):
                 city_data = json_data["Citys"][0][str(counter)][0]         
                 city_name = city_data["Name"]
 
@@ -178,7 +178,7 @@ def send_email(city_data_array):
 
     massage = ""
     for city_data in city_data_array:
-        massage = "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "\n" 
+        massage = massage + "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "\n" 
 
     msg = EmailMessage()
     msg['Subject'] = 'New Updates'

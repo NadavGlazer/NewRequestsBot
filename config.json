@@ -8,7 +8,7 @@
         }
     ],
     "MailingList": [
-        "nadav28223@gmail.com"
+        "nadav28223@gmail.com"      
     ],
     "Citys": [
         {
@@ -24,7 +24,20 @@
                     "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
-            ]            
+            ],
+            "1": [
+                {
+                    "Name": "Holon",
+                    "url": "https://www.holon.muni.il/Residents/Engineering/LocatingInformation/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ]                
         }
     ]
 }
