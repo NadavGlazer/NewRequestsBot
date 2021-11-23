@@ -37,7 +37,150 @@
                     "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
-            ]                
+            ],
+            "2": [
+                {
+                    "Name": "BatYam",
+                    "url": "http://batyam.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "3": [
+                {
+                    "Name": "RamatGan",
+                    "url": "https://handasa.ramat-gan.muni.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "4": [
+                {
+                    "Name": "PetahTikva",
+                    "url": "https://www.petah-tikva.muni.il/Engineering/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "5": [
+                {
+                    "Name": "KiryatMalahi",
+                    "url": "http://km.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "6": [
+                {
+                    "Name": "Herzliya",
+                    "url": "http://handasa.herzliya.muni.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "7": [
+                {
+                    "Name": "RamatHasharon",
+                    "url": "https://ramathasharon.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "8": [
+                {
+                    "Name": "Sharonim",
+                    "url": "https://www.sharonim.org.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "9": [
+                {
+                    "Name": "Rechovot",
+                    "url": "http://rechovot.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "10": [
+                {
+                    "Name": "Haifa",
+                    "url": "http://haifa.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "11": [
+                {
+                    "Name": "Ashdod",
+                    "url": "http://ashdod.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ],
+            "12": [
+                {
+                    "Name": "Givatayim",
+                    "url": "https://www.givatayim.muni.il/Services/handasa/Pages/tihnun-hodaot.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ]                    
         }
     ]
 }

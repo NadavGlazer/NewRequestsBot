@@ -99,13 +99,17 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
     try:
         from_date = driver.find_element_by_id(from_date_table_id)
     except:
-        time.sleep(1)
+        time.sleep(2)
         from_date = driver.find_element_by_id(from_date_table_id)
     from_date.click()
     time.sleep(2)
 
     #Setting the date to today`s date
-    today_button = driver.find_element_by_class_name(today_button_class_name)
+    try:
+        today_button = driver.find_element_by_class_name(today_button_class_name)
+    except:
+        time.sleep(2)
+        today_button = driver.find_element_by_class_name(today_button_class_name)
     today_button.click()
     time.sleep(2)
 
@@ -178,7 +182,7 @@ def send_email(city_data_array):
 
     massage = ""
     for city_data in city_data_array:
-        massage = massage + "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "\n" 
+        massage = massage + "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "                               "
 
     msg = EmailMessage()
     msg['Subject'] = 'New Updates'
