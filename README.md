@@ -6,7 +6,7 @@ Creating and running the docker :
 
 Open cmd
 
-enter youre machine
+enter your machine
           ssh name@ip
           password
 
