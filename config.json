@@ -4,11 +4,11 @@
     "BotEmailInfo": [
         {
             "EmailAdress": "nesahbot@gmail.com",
-            "Password" : "Abcd1234!"
+            "Password": "Abcd1234!"
         }
     ],
     "MailingList": [
-        "nadav28223@gmail.com"      
+        "nadav28223@gmail.com"
     ],
     "Citys": [
         {
@@ -53,19 +53,6 @@
             ],
             "3": [
                 {
-                    "Name": "RamatGan",
-                    "url": "https://handasa.ramat-gan.muni.il/newengine/Pages/pirsumim2.aspx",
-                    "from_date_table_id": "PubsDateFrom",
-                    "today_button_class_name": "today",
-                    "submit_button_xpath": "//*[@id='btnShow']",
-                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
-                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
-                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
-                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
-                }
-            ],
-            "4": [
-                {
                     "Name": "PetahTikva",
                     "url": "https://www.petah-tikva.muni.il/Engineering/newengine/Pages/pirsumim2.aspx",
                     "from_date_table_id": "PubsDateFrom",
@@ -77,7 +64,7 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
             ],
-            "5": [
+            "4": [
                 {
                     "Name": "KiryatMalahi",
                     "url": "http://km.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -90,7 +77,7 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
             ],
-            "6": [
+            "5": [
                 {
                     "Name": "Herzliya",
                     "url": "http://handasa.herzliya.muni.il/newengine/Pages/pirsumim2.aspx",
@@ -103,7 +90,7 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
             ],
-            "7": [
+            "6": [
                 {
                     "Name": "RamatHasharon",
                     "url": "https://ramathasharon.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -116,20 +103,7 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
             ],
-            "8": [
-                {
-                    "Name": "Sharonim",
-                    "url": "https://www.sharonim.org.il/newengine/Pages/pirsumim2.aspx",
-                    "from_date_table_id": "PubsDateFrom",
-                    "today_button_class_name": "today",
-                    "submit_button_xpath": "//*[@id='btnShow']",
-                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
-                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
-                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
-                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
-                }
-            ],
-            "9": [
+            "7": [
                 {
                     "Name": "Rechovot",
                     "url": "http://rechovot.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -142,7 +116,7 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
             ],
-            "10": [
+            "8": [
                 {
                     "Name": "Haifa",
                     "url": "http://haifa.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -155,7 +129,7 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
             ],
-            "11": [
+            "9": [
                 {
                     "Name": "Ashdod",
                     "url": "http://ashdod.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -167,11 +141,11 @@
                     "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
-            ],
-            "12": [
+            ],            
+            "10": [
                 {
-                    "Name": "Givatayim",
-                    "url": "https://www.givatayim.muni.il/Services/handasa/Pages/tihnun-hodaot.aspx",
+                    "Name": "RamatGan",
+                    "url": "https://handasa.ramat-gan.muni.il/newengine/Pages/pirsumim2.aspx",
                     "from_date_table_id": "PubsDateFrom",
                     "today_button_class_name": "today",
                     "submit_button_xpath": "//*[@id='btnShow']",
@@ -180,7 +154,20 @@
                     "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
                 }
-            ]                    
+            ],
+            "11": [
+                {
+                    "Name": "Sharonim",
+                    "url": "https://www.sharonim.org.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]"
+                }
+            ]
         }
     ]
 }

@@ -6,6 +6,8 @@ import os
 import smtplib
 from email.message import EmailMessage
 
+from selenium.webdriver.chrome import options
+
 
 def run_on_working_hours():
     """Runs the program"""
@@ -17,6 +19,20 @@ def run_on_working_hours():
 
             city_with_updates = []
             counter = 0
+            #Sets the Chrome options
+            options = webdriver.ChromeOptions()
+            options.add_argument("--headless")  
+            options.add_argument("--hide-scrollbars")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+    
+            #Creating the driver
+            try:
+                driver = webdriver.Chrome(executable_path = json_data["MainComputerDriverPath"], chrome_options=options)
+            except:
+                time.sleep(1)
+                driver = webdriver.Chrome(executable_path = json_data["MainComputerDriverPath"], chrome_options=options)
+            time.sleep(2)
 
             while counter < len(json_data["Citys"][0]):
                 city_data = json_data["Citys"][0][str(counter)][0]         
@@ -25,7 +41,7 @@ def run_on_working_hours():
                 filename = generate_city_daily_information_text_file(city_name)
                 
                 #Gets the current amount of uploaded files 
-                current_uploads_amount = find_request_amount_by_city(city_data)            
+                current_uploads_amount = find_request_amount_by_city(city_data, driver)            
                 
                 #Reads the last amount of uploaded files from the information file
                 last_line = ""
@@ -47,10 +63,10 @@ def run_on_working_hours():
             
             if city_with_updates:
                 send_email(city_with_updates)
-
+            driver.close()
             #Waiting an hour then checking again
-            print("Waiting for an hour " + datetime.now().strftime("%H:%M:%S"))
-            time.sleep(3600)
+            print("Waiting half an hour " + datetime.now().strftime("%H:%M:%S"))
+            time.sleep(1800)
         else:
             #Waiting half an hour then checking again
             print("Waiting half an hour " + datetime.now().strftime("%H:%M:%S"))
@@ -72,26 +88,11 @@ def check_if_working_hours():
     return False      
 
 
-def find_request_amount(driver_path, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, request_table_first_cell_xpath, plan_table_xpath, plan_table_first_cell_xpath, no_data_found_hebrow):
+def find_request_amount(driver, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, request_table_first_cell_xpath, plan_table_xpath, plan_table_first_cell_xpath, no_data_found_hebrow):
     """Gets the information about one site and returns the amount of requests"""
-    #Sets the Chrome options
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")  
-    chrome_options.add_argument("--hide-scrollbars")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    
-    #Creating the driver
-    try:
-        driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options)
-    except:
-        time.sleep(1)
-        driver = webdriver.Chrome(executable_path= driver_path, chrome_options=chrome_options)
-    time.sleep(2)
-
     #Opening the URL
     driver.get(url)
-    time.sleep(2)
+    time.sleep(3)
 
     #Starting the process of extracting the data
 
@@ -134,17 +135,15 @@ def find_request_amount(driver_path, url, from_date_table_id, today_button_class
         plan_amount = 0     
     print(plan_amount)
 
-    driver.close()
-
     return(request_amount+plan_amount)
 
-def find_request_amount_by_city(city_data):
+def find_request_amount_by_city(city_data, driver):
     """Gets a city, calls for 'find_request_amount' function and takes the information from the json"""
     json_file = open("config.json", encoding="utf8")
     json_data = json.load(json_file)
 
     return(find_request_amount(
-        json_data["MainComputerDriverPath"],
+        driver,
         city_data["url"],
         city_data["from_date_table_id"],
         city_data["today_button_class_name"],
@@ -182,7 +181,7 @@ def send_email(city_data_array):
 
     massage = ""
     for city_data in city_data_array:
-        massage = massage + "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "                               "
+        massage = massage + "New Uploads in " + city_data["Name"] + " site -- " + city_data["url"] + "\n"
 
     msg = EmailMessage()
     msg['Subject'] = 'New Updates'
