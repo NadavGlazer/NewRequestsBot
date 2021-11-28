@@ -7,6 +7,7 @@ import smtplib
 from email.message import EmailMessage
 
 from selenium.webdriver.chrome import options
+from selenium.common.exceptions import WebDriverException
 
 
 def run_on_working_hours():
@@ -41,16 +42,10 @@ def run_on_working_hours():
                 filename = generate_city_daily_information_text_file(city_name)
                 
                 #Gets the current amount of uploaded files 
-                current_uploads_amount = find_request_amount_by_city(city_data, driver)            
+                current_uploads_amount = get_request_amount_by_city(city_data, driver)            
                 
                 #Reads the last amount of uploaded files from the information file
-                last_line = ""
-                with open("InformationFiles/" + filename, "r+") as information_file:
-                    information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_uploads_amount) +"\n")
-                    for line in information_file:
-                            last_line = line
-            
-                last_uploads_amount = int(last_line.split("*")[1])
+                last_uploads_amount = get_last_updates_amount_of_city(filename, current_uploads_amount)
 
                 #In case theres new uploaded files- sends mail to the relevant emails
                 if current_uploads_amount > last_uploads_amount:
@@ -63,7 +58,9 @@ def run_on_working_hours():
             
             if city_with_updates:
                 send_email(city_with_updates)
+
             driver.close()
+
             #Waiting an hour then checking again
             print("Waiting half an hour " + datetime.now().strftime("%H:%M:%S"))
             time.sleep(1800)
@@ -71,6 +68,7 @@ def run_on_working_hours():
             #Waiting half an hour then checking again
             print("Waiting half an hour " + datetime.now().strftime("%H:%M:%S"))
             time.sleep(1800)
+
 
 def check_if_working_hours():
     """Returns True if its working hours else returns False"""
@@ -88,10 +86,14 @@ def check_if_working_hours():
     return False      
 
 
-def find_request_amount(driver, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, request_table_first_cell_xpath, plan_table_xpath, plan_table_first_cell_xpath, no_data_found_hebrow):
+def get_request_amount(driver, url, from_date_table_id, today_button_class_name, submit_button_xpath, request_table_xpath, request_table_first_cell_xpath, plan_table_xpath, plan_table_first_cell_xpath, no_data_found_hebrow):
     """Gets the information about one site and returns the amount of requests"""
     #Opening the URL
-    driver.get(url)
+    try:
+        driver.get(url)
+    except WebDriverException:
+        print("page down")
+        return 0
     time.sleep(3)
 
     #Starting the process of extracting the data
@@ -137,12 +139,12 @@ def find_request_amount(driver, url, from_date_table_id, today_button_class_name
 
     return(request_amount+plan_amount)
 
-def find_request_amount_by_city(city_data, driver):
+def get_request_amount_by_city(city_data, driver):
     """Gets a city, calls for 'find_request_amount' function and takes the information from the json"""
     json_file = open("config.json", encoding="utf8")
     json_data = json.load(json_file)
 
-    return(find_request_amount(
+    return(get_request_amount(
         driver,
         city_data["url"],
         city_data["from_date_table_id"],
@@ -196,5 +198,15 @@ def send_email(city_data_array):
 
     print("Sent Mail")
 
-
+def get_last_updates_amount_of_city(filename, current_uploads_amount):
+    """Gets filename and uploads amount and returns last amount and adds to the the file the current amount"""
+    last_line = ""
+    with open("InformationFiles/" + filename, "r+") as information_file:
+        for line in information_file:
+                last_line = line
+        information_file.write(datetime.now().strftime("%H:%M:%S*") + " " + str(current_uploads_amount) +"\n")
+            
+            
+    last_uploads_amount = int(last_line.split("*")[1])
+    return last_uploads_amount
             
