@@ -166,29 +166,38 @@ def get_request_amount(driver, filename, city_data):
     for i in range(1, plan_amount + 1) :        
         current_plan_numbers.append((driver.find_element_by_xpath(plan_number_template_xpath.replace("COUNTER", str(i))).text))
     print(current_request_numbers, current_plan_numbers)
-   
+    
+    if current_plan_numbers:
+        total_current_updates_numbers = current_request_numbers.append(current_plan_numbers)
+    else:
+        total_current_updates_numbers = current_request_numbers 
+
     last_requests_numbers = []  
     last_plans_numbers = []
 
+    last_number_of_requests = int(last_uploads_data.split("*")[0])
+    last_number_of_plans = int(last_uploads_data.split("*")[1])
+
     #Extracting the data from the information file to two seperate lists   
-    if last_uploads_data.count("*") > 1:        
-
-        number_of_requests = int(last_uploads_data.split("*")[0])
-
+    if last_number_of_plans + last_number_of_requests > 0:      
         last_uploads_data = last_uploads_data.split("*", 2)[2]        
         
         counter = 0
         for number in last_uploads_data.split("*"):
-            if counter < number_of_requests :
+            if counter < last_number_of_requests :
                 last_requests_numbers.append(number.replace("\n", ""))
             else:
                 last_plans_numbers.append(number.replace("\n", ""))
-            counter += 1
+            counter += 1        
     print(last_requests_numbers, last_plans_numbers)      
     
     new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers))
     new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers))
-
+    
+    if not new_plans_numbers and not new_requests_numbers:
+        set_data_in_information_file(filename, current_uploads_amount_seperated , total_current_updates_numbers)
+        return []    
+    
     information = []
     information.append(city_name)
     information.append(url)
@@ -204,11 +213,7 @@ def get_request_amount(driver, filename, city_data):
         information.append(get_data_of_specific_update_number(driver, number, city_data, json_data, "plan", counter))
         counter += 1
 
-    #Writing the new data in the infomation file
-    if current_plan_numbers:
-        total_current_updates_numbers = current_request_numbers.append(current_plan_numbers)
-    else:
-        total_current_updates_numbers = current_request_numbers    
+    #Writing the new data in the infomation file       
     set_data_in_information_file(filename, current_uploads_amount_seperated , total_current_updates_numbers)
 
     return information
@@ -253,7 +258,7 @@ def send_email(city_data_array):
         massage = massage + city[2] + " New Uploads in " + city[0] + " site -- " + city[1] + "\n"
         print(details_list)
         for data in details_list:
-            massage = massage +"- מספר בקשה " + data[0] + ",- סוג בקשה ," + data[1] + ", - סוג מסמך " + data[2] + "- מבקש " + data[3] + "- עורך " + data[4] + "\n"
+            massage = massage + data[0] + " , " + data[1] + " , " + data[2] + " , " + data[3] + " , " + data[4] + "\n"
             massage = massage + "\n"
         massage = massage + "\n"
 
@@ -310,10 +315,13 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
 
     if type_of_update == "request":
         number_template_xpath = city_data["request_number_template_xpath"]
+        type_of_project_xpath = city_data["request_type_of_project_xpath"]
+
     else:
         number_template_xpath = city_data["plan_number_template_xpath"]
+        type_of_project_xpath = city_data["plan_type_of_project_xpath"]
 
-    type_of_project_xpath = city_data["type_of_project_xpath"]
+    man_of_interest_table_button_xpath = city_data["man_of_interest_table_button_xpath"]
     man_of_interest_table_xpath = city_data["man_of_interest_table_xpath"]
     type_of_man_of_interest_xpath = city_data["type_of_man_of_interest_xpath"]
     name_of_man_of_interest_xpath = city_data["name_of_man_of_interest_xpath"]
@@ -322,14 +330,20 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     editing_hebrow = json_data["EditingHebrow"]
 
     information.append(number)
-    information.append(type_of_update)
+    if type_of_update == "request":
+        information.append("בקשה")
+    else:
+        information.append("תוכנית")
 
     #Opening the URL
     try:
         driver.get(url)
     except WebDriverException:
         print("page down")
-        return [number]
+        information.append("")
+        information.append("")
+        information.append("")
+        return information
     time.sleep(3)
 
     #Starting the process of extracting the data
@@ -373,6 +387,10 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
         number_button = driver.find_element_by_xpath((number_template_xpath.replace("COUNTER", str(counter))))   
     number_button.click()
     time.sleep(2)    
+
+    man_of_interest_table_button = driver.find_element_by_xpath(man_of_interest_table_button_xpath)
+    if not man_of_interest_table_button.get_attribute('aria-expanded'):
+        man_of_interest_table_button.click()
 
     man_of_interest_table =  driver.find_elements_by_xpath(man_of_interest_table_xpath)
     man_of_interest_amount = len(man_of_interest_table)

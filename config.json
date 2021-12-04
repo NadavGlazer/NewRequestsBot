@@ -28,7 +28,9 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
