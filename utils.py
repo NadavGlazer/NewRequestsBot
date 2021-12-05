@@ -83,7 +83,6 @@ def get_request_amount(driver, filename, city_data):
     #Checking if theres no requests
     if request_amount == 1 and driver.find_element_by_xpath(request_table_first_cell_xpath).text == no_data_found_hebrow:
         request_amount = 0      
-    print(request_amount)        
 
     #Getting the amount of plans in the site
     plans_table =  driver.find_elements_by_xpath(plan_table_xpath)
@@ -91,7 +90,6 @@ def get_request_amount(driver, filename, city_data):
     #Checking if theres no plans
     if plan_amount == 1 and driver.find_element_by_xpath(plan_table_first_cell_xpath).text == no_data_found_hebrow:
         plan_amount = 0     
-    print(plan_amount)    
     
     #Calculating the total amount of updates
     current_uploads_amount = plan_amount + request_amount
@@ -111,7 +109,6 @@ def get_request_amount(driver, filename, city_data):
     current_plan_numbers = []
     for i in range(1, plan_amount + 1) :        
         current_plan_numbers.append((driver.find_element_by_xpath(plan_number_template_xpath.replace("COUNTER", str(i))).text))
-    print(current_request_numbers, current_plan_numbers)
     
     if current_plan_numbers:
         total_current_updates_numbers = current_request_numbers.append(current_plan_numbers)
@@ -135,11 +132,13 @@ def get_request_amount(driver, filename, city_data):
             else:
                 last_plans_numbers.append(number.replace("\n", ""))
             counter += 1        
-    print(last_requests_numbers, last_plans_numbers)      
     
     new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers))
     new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers))
     
+    print(new_requests_numbers)
+    print(new_plans_numbers)
+
     if not new_plans_numbers and not new_requests_numbers:
         set_data_in_information_file(filename, current_uploads_amount_seperated , total_current_updates_numbers)
         return []    
@@ -334,6 +333,7 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     number_button.click()
     time.sleep(2)    
 
+    #Checking if the information is shown or visiable
     try:
         man_of_interest_table_button = driver.find_element_by_xpath(man_of_interest_table_button_xpath)
     except:
@@ -348,13 +348,10 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
 
     man_of_interest_table =  driver.find_elements_by_xpath(man_of_interest_table_xpath)
     man_of_interest_amount = len(man_of_interest_table)
-    print(man_of_interest_amount)  
 
     name_asking_man_of_interest = ""
     name_editing_man_of_interest = ""
     for i in range(1, man_of_interest_amount + 1):
-        print(driver.find_element_by_xpath((type_of_man_of_interest_xpath.replace("COUNTER", str(i)))).text)
-
         try:
             type_of_man_of_interest = driver.find_element_by_xpath((type_of_man_of_interest_xpath.replace("COUNTER", str(i)))).text
         except:
@@ -374,8 +371,10 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
                 name_editing_man_of_interest = name_editing_man_of_interest + driver.find_element_by_xpath((name_of_man_of_interest_xpath.replace("COUNTER", str(i)))).text + "," 
     
     print(name_editing_man_of_interest, name_asking_man_of_interest)
+
     information.append(name_asking_man_of_interest)
     information.append(name_editing_man_of_interest)
+
     return information
 
 

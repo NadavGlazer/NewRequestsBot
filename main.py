@@ -33,9 +33,10 @@ def run_on_working_hours():
             while counter < len(json_data["Citys"][0]):
                 city_data = json_data["Citys"][0][str(counter)][0]         
                 city_name = city_data["Name"]
-
+                
                 filename = utils.generate_city_daily_information_text_file(city_name)
                 
+                print("Started " + city_name)
                 #Gets the current amount of uploaded files and the data, will return [] if none
                 is_new_updates = utils.get_request_amount(driver, filename, city_data)
                                         
@@ -46,6 +47,8 @@ def run_on_working_hours():
             
             if city_with_updates:
                 utils.send_email(city_with_updates)
+            else:
+                print("Noting changed in " + city_name)
 
             driver.close()
 
