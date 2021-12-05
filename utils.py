@@ -322,7 +322,7 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
         type_of_project = driver.find_element_by_xpath(type_of_project_xpath.replace("COUNTER", str(counter))).text
     except:
         time.sleep(2)
-        type_of_project = driver.find_element_by_xpath(type_of_project_xpath.replace("COUNTER", str(counter))).text
+        type_of_project = "Error"
     information.append(type_of_project)
 
     #Entering to the specific project number site
@@ -334,7 +334,15 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     number_button.click()
     time.sleep(2)    
 
-    man_of_interest_table_button = driver.find_element_by_xpath(man_of_interest_table_button_xpath)
+    try:
+        man_of_interest_table_button = driver.find_element_by_xpath(man_of_interest_table_button_xpath)
+    except:
+        try:
+            man_of_interest_table_button = driver.find_element_by_xpath(man_of_interest_table_button_xpath)
+        except:        
+            information.append("")
+            information.append("")
+            return information
     if not man_of_interest_table_button.get_attribute('aria-expanded'):
         man_of_interest_table_button.click()
 
@@ -367,7 +375,7 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     
     print(name_editing_man_of_interest, name_asking_man_of_interest)
     information.append(name_asking_man_of_interest)
-    information.append(name_asking_man_of_interest)
+    information.append(name_editing_man_of_interest)
     return information
 
 

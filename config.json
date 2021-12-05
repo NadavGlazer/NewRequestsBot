@@ -10,7 +10,7 @@
         }
     ],
     "MailingList": [
-        "nadav28223@gmail.com"
+        "nadav28223@gmail.com"       
     ],
     "Citys": [
         {
@@ -50,7 +50,9 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
@@ -69,32 +71,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
-            ],
+            ],            
             "3": [
-                {
-                    "Name": "PetahTikva",
-                    "url": "https://www.petah-tikva.muni.il/Engineering/newengine/Pages/pirsumim2.aspx",
-                    "from_date_table_id": "PubsDateFrom",
-                    "today_button_class_name": "today",
-                    "submit_button_xpath": "//*[@id='btnShow']",
-                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
-                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
-                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
-                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
-                    "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
-                    "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
-                    "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
-                    "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
-                }
-            ],
-            "4": [
                 {
                     "Name": "KiryatMalahi",
                     "url": "http://km.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -107,13 +92,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],
-            "5": [
+            "4": [
                 {
                     "Name": "Herzliya",
                     "url": "http://handasa.herzliya.muni.il/newengine/Pages/pirsumim2.aspx",
@@ -126,13 +113,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],
-            "6": [
+            "5": [
                 {
                     "Name": "RamatHasharon",
                     "url": "https://ramathasharon.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -145,13 +134,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],
-            "7": [
+            "6": [
                 {
                     "Name": "Rechovot",
                     "url": "http://rechovot.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -164,13 +155,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],
-            "8": [
+            "7": [
                 {
                     "Name": "Haifa",
                     "url": "http://haifa.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -183,13 +176,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],
-            "9": [
+            "8": [
                 {
                     "Name": "Ashdod",
                     "url": "http://ashdod.complot.co.il/newengine/Pages/pirsumim2.aspx",
@@ -202,13 +197,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],            
-            "10": [
+            "9": [
                 {
                     "Name": "RamatGan",
                     "url": "https://handasa.ramat-gan.muni.il/newengine/Pages/pirsumim2.aspx",
@@ -221,13 +218,15 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
             ],
-            "11": [
+            "10": [
                 {
                     "Name": "Sharonim",
                     "url": "https://www.sharonim.org.il/newengine/Pages/pirsumim2.aspx",
@@ -240,7 +239,9 @@
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
                     "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
                     "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
