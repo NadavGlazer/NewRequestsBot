@@ -36,19 +36,20 @@ def run_on_working_hours():
                 
                 filename = utils.generate_city_daily_information_text_file(city_name)
                 
-                print("Started " + city_name)
+                print("\n" + "Started checking " + city_name)
                 #Gets the current amount of uploaded files and the data, will return [] if none
                 is_new_updates = utils.get_request_amount(driver, filename, city_data)
                                         
                 if is_new_updates:
-                    city_with_updates.append(is_new_updates) 
-                    
+                    city_with_updates.append(is_new_updates)
+                    print("Finished" + city_name) 
+                else:
+                    print("Noting changed in " + city_name)
                 counter += 1
             
             if city_with_updates:
                 utils.send_email(city_with_updates)
-            else:
-                print("Noting changed in " + city_name)
+            
 
             driver.close()
 

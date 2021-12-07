@@ -100,6 +100,7 @@ def get_request_amount(driver, filename, city_data):
     
     #Return False if no uploads
     if current_uploads_amount == 0:
+        set_data_in_information_file(filename, current_uploads_amount_seperated , [])
         return []
     
     current_request_numbers = []
@@ -131,13 +132,17 @@ def get_request_amount(driver, filename, city_data):
                 last_requests_numbers.append(number.replace("\n", ""))
             else:
                 last_plans_numbers.append(number.replace("\n", ""))
-            counter += 1        
+            counter += 1 
+
+    new_plans_numbers = []
+    new_requests_numbers =[]
     
-    new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers))
-    new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers))
+    if current_request_numbers :          
+        new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers))
+    if current_plan_numbers :
+        new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers))
     
-    print(new_requests_numbers)
-    print(new_plans_numbers)
+    print(len(current_request_numbers), len(current_plan_numbers))
 
     if not new_plans_numbers and not new_requests_numbers:
         set_data_in_information_file(filename, current_uploads_amount_seperated , total_current_updates_numbers)
@@ -203,9 +208,9 @@ def send_email(city_data_array):
         massage = massage + city[2] + " New Uploads in " + city[0] + " site -- " + city[1] + "\n"
         print(details_list)
         for data in details_list:
-            massage = massage + data[0] + " , " + data[1] + " , " + data[2] + " , " + data[3] + " , " + data[4] + "\n"
-            massage = massage + "\n"
-        massage = massage + "\n"
+            massage = massage + data[0] + " , " + data[1] + " , " + data[3] + " , " + data[4] + " , " + data[5] + "\n"
+            massage = massage + "at : " + data[2] + "\n"
+        massage = massage
 
 
     msg = EmailMessage()
@@ -288,6 +293,7 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
         information.append("")
         information.append("")
         information.append("")
+        information.append("")
         return information
     time.sleep(3)
 
@@ -315,6 +321,8 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     submit_button = driver.find_element_by_xpath(submit_button_xpath)
     submit_button.click()
     time.sleep(2)
+
+    information.append(str(driver.current_url))
 
     #Getting the type of the project from the table
     try:
