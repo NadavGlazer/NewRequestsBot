@@ -7,6 +7,7 @@ from datetime import datetime
 
 def run_on_working_hours():
     """Runs the program"""
+    list_known_of_numbers = []
     while(True):
         if (utils.check_if_working_hours()):
             #Creates new information file in the begging of the day else does noting
@@ -38,10 +39,10 @@ def run_on_working_hours():
                 
                 print("\n" + "Started checking " + city_name)
                 #Gets the current amount of uploaded files and the data, will return [] if none
-                is_new_updates = utils.get_request_amount(driver, filename, city_data)
+                new_updates = utils.get_request_amount(driver, filename, city_data, list_known_of_numbers)
                                         
-                if is_new_updates:
-                    city_with_updates.append(is_new_updates)
+                if new_updates:
+                    city_with_updates.append(new_updates)
                     print("Finished" + city_name) 
                 else:
                     print("Noting changed in " + city_name)
@@ -60,6 +61,8 @@ def run_on_working_hours():
             #Waiting half an hour then checking again
             print("Waiting half an hour " + datetime.now().strftime("%H:%M:%S"))
             time.sleep(1800)
+            list_known_of_numbers = []
+
 
 if __name__ == "__main__":
     #json_file = open("config.json", encoding="utf8")

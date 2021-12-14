@@ -175,7 +175,7 @@
                     "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
                     "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
                     "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
-                    "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
+                    "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr/td[COUNTER]/a",
                     "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
                     "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
                     "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
@@ -246,7 +246,29 @@
                     "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
                     "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
                 }
+            ],
+            "11": [
+                {
+                    "Name": "RishonLezion",
+                    "url": "https://rishonlezion.complot.co.il/newengine/Pages/pirsumim2.aspx",
+                    "from_date_table_id": "PubsDateFrom",
+                    "today_button_class_name": "today",
+                    "submit_button_xpath": "//*[@id='btnShow']",
+                    "request_table_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr",
+                    "request_table_first_cell_xpath": "//*[@id=\"bk-results-table\"]/tbody/tr/td[1]",
+                    "plan_table_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr",
+                    "plan_table_first_cell_xpath": "//*[@id=\"tb-results-table\"]/tbody/tr/td[1]",
+                    "request_number_template_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
+                    "plan_number_template_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[1]/a",
+                    "request_type_of_project_xpath" : "//*[@id=\"bk-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "plan_type_of_project_xpath" : "//*[@id=\"tb-results-table\"]/tbody/tr[COUNTER]/td[3]",
+                    "man_of_interest_table_button_xpath" : "//*[@id=\"baaley-inyan\"]/div[1]/div",
+                    "man_of_interest_table_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr",
+                    "type_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[1]",
+                    "name_of_man_of_interest_xpath" : "//*[@id=\"table-baaley-inyan\"]/table/tbody/tr[COUNTER]/td[2]"
+                }
             ]
+
         }
         
     ]

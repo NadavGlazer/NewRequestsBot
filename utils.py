@@ -25,7 +25,7 @@ def check_if_working_hours():
     return False      
 
 
-def get_request_amount(driver, filename, city_data):
+def get_request_amount(driver, filename, city_data, list_known_of_numbers):
     """Gets the information about one site and returns the amount of requests"""
     json_file = open("config.json", encoding="utf8")
     json_data = json.load(json_file)
@@ -110,12 +110,7 @@ def get_request_amount(driver, filename, city_data):
     current_plan_numbers = []
     for i in range(1, plan_amount + 1) :        
         current_plan_numbers.append((driver.find_element_by_xpath(plan_number_template_xpath.replace("COUNTER", str(i))).text))
-    
-    if current_plan_numbers:
-        total_current_updates_numbers = current_request_numbers.append(current_plan_numbers)
-    else:
-        total_current_updates_numbers = current_request_numbers 
-
+   
     last_requests_numbers = []  
     last_plans_numbers = []
 
@@ -123,7 +118,7 @@ def get_request_amount(driver, filename, city_data):
     last_number_of_plans = int(last_uploads_data.split("*")[1])
 
     #Extracting the data from the information file to two seperate lists   
-    if last_number_of_plans + last_number_of_requests > 0:      
+    if last_number_of_plans + last_number_of_requests > 0 and len(last_uploads_data.split("*", 2)) > 2:      
         last_uploads_data = last_uploads_data.split("*", 2)[2]        
         
         counter = 0
@@ -137,12 +132,17 @@ def get_request_amount(driver, filename, city_data):
     new_plans_numbers = []
     new_requests_numbers =[]
     
-    if current_request_numbers :          
-        new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers))
+    if current_request_numbers:          
+        new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers)-set(list_known_of_numbers))
     if current_plan_numbers :
-        new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers))
+        new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers) - set(list_known_of_numbers))
     
-    print(len(current_request_numbers), len(current_plan_numbers))
+    print(current_request_numbers, current_plan_numbers)
+
+    if current_plan_numbers:
+        total_current_updates_numbers = current_request_numbers.append(current_plan_numbers)
+    else:
+        total_current_updates_numbers = current_request_numbers 
 
     if not new_plans_numbers and not new_requests_numbers:
         set_data_in_information_file(filename, current_uploads_amount_seperated , total_current_updates_numbers)
@@ -156,6 +156,7 @@ def get_request_amount(driver, filename, city_data):
     counter = 1
     for number in new_requests_numbers:
         information.append(get_data_of_specific_update_number(driver, number, city_data, json_data, "request", counter))
+        
         counter += 1
 
     counter = 1
@@ -208,9 +209,9 @@ def send_email(city_data_array):
         massage = massage + city[2] + " New Uploads in " + city[0] + " site -- " + city[1] + "\n"
         print(details_list)
         for data in details_list:
-            massage = massage + data[0] + " , " + data[1] + " , " + data[3] + " , " + data[4] + " , " + data[5] + "\n"
-            massage = massage + "at : " + data[2] + "\n"
-        massage = massage
+            massage = massage + data[0] + " , " + data[1] + " , " + data[2] + " , " + data[4] + " , " + data[5] + "\n"
+            massage = massage + "at : " + data[3] + "\n"+ "\n"
+        massage = massage+ "\n"
 
 
     msg = EmailMessage()
@@ -322,7 +323,6 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     submit_button.click()
     time.sleep(2)
 
-    information.append(str(driver.current_url))
 
     #Getting the type of the project from the table
     try:
@@ -336,10 +336,18 @@ def get_data_of_specific_update_number(driver, number, city_data, json_data, typ
     try:
         number_button = driver.find_element_by_xpath((number_template_xpath.replace("COUNTER", str(counter))))
     except:
-        time.sleep(2)
-        number_button = driver.find_element_by_xpath((number_template_xpath.replace("COUNTER", str(counter))))   
+        try:
+            time.sleep(2)
+            number_button = driver.find_element_by_xpath((number_template_xpath.replace("COUNTER", str(counter))))   
+        except:
+            information.append("")
+            information.append("")
+            information.append("")
+            return information
     number_button.click()
-    time.sleep(2)    
+    time.sleep(2)  
+    
+    information.append(str(driver.current_url))
 
     #Checking if the information is shown or visiable
     try:
