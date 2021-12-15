@@ -25,7 +25,7 @@ def check_if_working_hours():
     return False      
 
 
-def get_request_amount(driver, filename, city_data, list_known_of_numbers):
+def get_request_amount(driver, filename, city_data):
     """Gets the information about one site and returns the amount of requests"""
     json_file = open("config.json", encoding="utf8")
     json_data = json.load(json_file)
@@ -132,11 +132,14 @@ def get_request_amount(driver, filename, city_data, list_known_of_numbers):
     new_plans_numbers = []
     new_requests_numbers =[]
     
-    if current_request_numbers:          
-        new_requests_numbers = list(set(current_request_numbers) - set(last_requests_numbers)-set(list_known_of_numbers))
+    if current_request_numbers:
+        for number in current_request_numbers:
+            if not number in last_requests_numbers:
+                new_requests_numbers.append(number)                    
     if current_plan_numbers :
-        new_plans_numbers = list(set(current_plan_numbers) - set(last_plans_numbers) - set(list_known_of_numbers))
-    
+        for number in current_plan_numbers:
+            if not number in last_plans_numbers:
+                new_plans_numbers.append(number)           
     print(current_request_numbers, current_plan_numbers)
 
     if current_plan_numbers:
